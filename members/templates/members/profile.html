@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{%extends 'members/Main.html'%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+{% block content %}
+<h1>Welcome to Profile section {{request.user}}</h1>
+<!--<button onclick="location.href={% url 'updateprofile' %}" type="button">view and update Details</button>-->
+<form method="POST" action="" enctype="multipart/form-data">
+				{% csrf_token %}
+				{{form.as_p}}
+    <input class="btn btn-primary" type="submit" name="Update Information">
+			</form>
+{% endblock content%}
+</body>
+</html>

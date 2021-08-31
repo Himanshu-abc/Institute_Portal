@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% extends 'members/Main.html' %}
+{% load static %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <style>
+.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+</style>
+</head>
+<body>
+
+<h1>Welcome to Members Dashboard {{ request.user }}</h1>
+<!--<a href="{% url 'profile_view' %}">Profile_view</a>-->
+<a href="{% url 'profile_view' %}" style="float: right;"><img src="{{ request.user.student.image.url }}" class="avatar" alt="Avatar" width="100"
+     height="100" ></a>
+
+{% endblock content %}
+</body>
+</html>

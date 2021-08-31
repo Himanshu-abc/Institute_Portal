@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% extends 'members/Main.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+</head>
+<body>
+{% block content %}
+<h3>Welcome to login page</h3>
+    <form method="post" action="" enctype="multipart/form-data" align="center">
+    {% csrf_token %}
+        <label>Name: </label>
+    <input type="text" name="username" id="username" placeholder="Enter username"><br>
+        <label>Password : </label>
+    <input type="password" name="password" id="password" placeholder="Enter password"><br>
+        <input type="submit" value="login"><br>
+        Don't have an account? <a href="{% url 'register' %}">Sign Up</a><br>
+        Forget Password ? <a href="{% url 'reset_password' %}">Reset Password</a>
+    </form>
+
+{% endblock content %}
+</body>
+</html>

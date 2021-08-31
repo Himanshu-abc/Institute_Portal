@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% extends 'members/Main.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Page</title>
+</head>
+<body>
+{% block content %}
+<form method="post" action="" enctype="multipart/form-data" align="center">
+    {% csrf_token %}
+    {{ form.username.label }} :
+    {{ form.username }}<br>
+    {{ form.email.label }} :
+    {{ form.email }}<br>
+    {{ form.password1.label }} :
+    {{ form.password1 }}<br>
+    {{ form.password2.label }} :
+    {{ form.password2 }}<br>
+    <input type="submit" value="register"><br>
+    Already have an account? <a href="{% url 'login' %}">Login</a>
+</form>
+
+{{ form.errors }}
+{% endblock content %}
+</body>
+</html>

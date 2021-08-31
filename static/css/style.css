@@ -1,0 +1,15 @@
+.newDiv{
+margin: 5px;
+height: 200px;
+background-color: aqua;
+text-align: center;
+font-size: large;
+}
+
+.maincontent{
+margin: 5px;
+height: 410px;
+background-color: aqua;
+text-align: center;
+font-size: large;
+}
