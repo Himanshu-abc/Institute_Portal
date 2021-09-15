@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% extends 'members/Main.html' %}
+{% load static %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ImageGallery</title>
+</head>
+<body>
+<h2>Upload Images to gallery</h2>
+<hr>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}<br>
+    <input type="submit" value="upload"><br>
+</form>
+{{ form.errors }}
+{% endblock content %}
+</body>
+</html>

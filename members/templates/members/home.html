@@ -44,6 +44,7 @@
       <td>{{stu.DOB}}</td>
       <td>{{stu.Gender}}</td>
       <td><img src="{{ stu.image.url }} " width="80" height="80"></td>
+      <td><a class="btn btn-danger" href="{% url 'deleteUser' stu.id %}">Delete</a></td>
     </tr>
   {% endfor %}
   </tbody>

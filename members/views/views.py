@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.models import Group, User
 from members.forms import createuserForm
 from members.decorator import *
+from django.http import FileResponse
 
 # Create your views here.
 
@@ -15,11 +16,19 @@ def home(request):
     context={}
     students = Student.objects.all()
     context['student']=students
-    return render(request,'members/home.html',context)
+    return render(request,'members/home.html',context,)
 
 @login_required(login_url='login')
 def members_home(request):
-    return render(request,'members/members_dashboard.html')
+
+    News = News_gallery.objects.all().order_by('-id')[:3]
+
+    Events = Upcoming_event.objects.all().order_by('-id')[:2]
+
+    Images = Image_gallery.objects.all().order_by('-id')[:3]
+
+    context = {'img': Images,'event': Events, 'news':News}
+    return render(request,'members/members_dashboard.html',context,)
 
 @unauthenticated_user
 def registration(request):
@@ -52,6 +61,7 @@ def loginPage(request):
         if user is not None:
             login(request, user)
             return redirect('home')
+
         else:
             messages.info(request, 'Username or password is incorrect')
 
@@ -61,3 +71,8 @@ def loginPage(request):
 def logoutuser(request):
     logout(request)
     return redirect('login')
+
+def deleteUser(request, pk):
+    user = User.objects.get(pk=pk)
+    user.delete()
+    return redirect('home')

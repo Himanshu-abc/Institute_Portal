@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% extends 'members/Main.html' %}
+{% load static %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Events</title>
+</head>
+<body>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}<br>
+    <input type="submit" value="update"><br>
+</form>
+{{ form.errors }}
+{% endblock content %}
+</body>
+</html>

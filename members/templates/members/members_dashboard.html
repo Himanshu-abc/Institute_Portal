@@ -14,14 +14,159 @@
   border-radius: 50%;
 }
 </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {box-sizing: border-box;}
+body {font-family: Verdana, sans-serif;}
+.mySlides {display: none;}
+img {vertical-align: middle;}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .text {font-size: 11px}
+}
+</style>
 </head>
 <body>
 
-<h1>Welcome to Members Dashboard {{ request.user }}</h1>
+<h2>Welcome to Members Dashboard {{ request.user }}</h2><br>
 <!--<a href="{% url 'profile_view' %}">Profile_view</a>-->
-<a href="{% url 'profile_view' %}" style="float: right;"><img src="{{ request.user.student.image.url }}" class="avatar" alt="Avatar" width="100"
-     height="100" ></a>
+{% if request.user.groups.first|lower == "student" %}
+<a href="{% url 'profile_view' %}" style="float: right;"><img src="{{ request.user.student.image.url }}" class="avatar" alt="Avatar" width="100" height="100" ></a>
+{% endif %}
 
-{% endblock content %}
+{% if request.user.groups.first|lower == "seupdater" %}
+<a class="btn btn-info" href="{% url 'AddIG' %}">Upload new Images</a>
+<a class="btn btn-info" href="{% url 'updateEvents' %}">Update Events List</a>
+<a class="btn btn-info" href="{% url 'updateNews' %}">Update News Article List</a>
+{% endif %}
+
+
+<h3 align="center">College Galleries</h3>
+
+<div class="slideshow-container">
+{% for i in img %}
+
+<div class="mySlides fade" align="center">
+<!--    <div class="numbertext"> {{forloop.counter}} / 3</div>-->
+    <img src="{{ i.images.url }} " width="800" height="350">
+    <div class="text">{{forloop.counter}} / 3</div>
+</div>
+{% endfor %}
+</div>
+<br>
+
+<div style="text-align:center">
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+</div>
+
+<script>
+var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+  setTimeout(showSlides, 3000); // Change image every 3 seconds
+}
+</script>
+
+<h3>Upcoming events list</h3>
+{% for i in event %}
+{{i.event_name }}<br>
+{{i.event_start_date}}<br>
+{{i.event_end_date}}<br>
+{{i.event_description}}<br><br>
+{% endfor %}
+
+<h3>News list</h3>
+{% for i in news %}
+News Title :{{i.news_title}}<br>
+<iframe
+    src="{{i.news_pdf.url}}"
+    frameBorder="0"
+    scrolling="auto"
+    height="100%"
+    width="50%"
+    allowfullscreen>
+</iframe>
+<br>
+
+{% endfor %}
+
 </body>
 </html>
+{% endblock content %}

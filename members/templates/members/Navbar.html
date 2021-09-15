@@ -1,6 +1,15 @@
 {% load static %}
+
+<style>
+  .hello-msg{
+  font-size: 18px;
+  color: #fff;
+  margin-right: 20px;
+  }
+</style>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <img src="{% static 'images/iist.jpg'%}">
+  <img src="{% static 'media/iist.jpg'%}">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -9,12 +18,36 @@
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'home'%}">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Features</a>
+      <li class="nav-item dropdown active">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Courses Details
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">EC</a>
+          <a class="dropdown-item" href="#">CSE</a>
+          <a class="dropdown-item" href="#">ME</a>
+          <a class="dropdown-item" href="#">IT</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Any Extra Course</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown active">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Syllabus
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">1 Sem</a>
+          <a class="dropdown-item" href="#">2 Sem</a>
+          <a class="dropdown-item" href="#">3 Sem</a>
+          <a class="dropdown-item" href="#">4 Sem</a>
+          <a class="dropdown-item" href="#">5 Sem</a>
+          <a class="dropdown-item" href="#">6 Sem</a>
+          <a class="dropdown-item" href="#">7 Sem</a>
+          <a class="dropdown-item" href="#">8 Sem</a>
+        </div>
       </li>
     </ul>
   </div>
-
     <span class= "hello-msg">Hello, {{request.user}}</span>
     <span><a class= "hello-msg" href="{% url 'logout' %}">Logout</a></span>
 </nav>

@@ -15,5 +15,9 @@ urlpatterns = [
     path('profile/', views.profile_home, name='profile'),
     path('updateprofile/', views.view_and_update_profile, name='updateprofile'),
     path('profile_view/',views.profile_view, name='profile_view'),
-
+    path('addig/',views.addimagesG,name='AddIG'),
+    path('updateEvents/', views.update_Events, name='updateEvents'),
+    path('updateNews/', views.update_News, name='updateNews'),
+    path('viewNews/', views.view_news, name='viewNews'),
+    path('deleteUser/<int:pk>/', views.deleteUser, name='deleteUser'),
 ]
